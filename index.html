@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body style="margin:0">
+<title>Swisscom AI Label Placer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+:root{--navy:#001155;--accent:#001155;--on-accent:#fff;--ink:#182238;--muted:#5d6678;--line:#d9dee8;--bg:#f4f6f9;--surface:#fff;--soft:#edf1f7;--hover:#f3f6ff;--check1:#eef1f6;--check2:#fff;--dash:#b7c0ce;--ok:#0a7a3e;--warn:#e0a100;--bad:#b42318}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--accent:#9db4ff;--on-accent:#0b1430;--ink:#e6e9f2;--muted:#9aa3b5;--line:#2c3550;--bg:#0d1222;--surface:#151c30;--soft:#202a44;--hover:#1c2640;--check1:#1a2136;--check2:#121829;--dash:#3a4566;--ok:#2fa866;--warn:#f0b429;--bad:#e5554a;color-scheme:dark}}:root[data-theme="dark"]{--accent:#9db4ff;--on-accent:#0b1430;--ink:#e6e9f2;--muted:#9aa3b5;--line:#2c3550;--bg:#0d1222;--surface:#151c30;--soft:#202a44;--hover:#1c2640;--check1:#1a2136;--check2:#121829;--dash:#3a4566;--ok:#2fa866;--warn:#f0b429;--bad:#e5554a;color-scheme:dark}*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1100px;margin:0 auto;padding-block:30px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:0 5px 22px #14203a0a}h1{font-size:26px;color:var(--accent);margin:0 0 5px}.intro{color:var(--muted);margin:0 0 20px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:end}.sub{margin-top:14px;padding:14px;border-radius:10px;background:var(--soft)}.toggle{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:14px;font-weight:600;cursor:pointer}.toggle input{width:16px;height:16px;accent-color:var(--accent);margin:0}.field label{display:block;font-weight:650;font-size:13px;margin-bottom:6px}.field input,.field select{width:100%;height:42px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);padding:8px 10px;font:inherit}.field label.upload{margin:0;height:42px;border:1px solid var(--accent);border-radius:8px;color:var(--accent);font-weight:650;display:flex;align-items:center;justify-content:center;cursor:pointer}.upload:hover{background:var(--hover)}.upload:focus-within,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.upload input{position:absolute;left:-9999px;width:1px;height:1px}.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:16px 0 0}.filetype{display:flex;align-items:center;gap:8px;margin-right:4px}.filetype label{font-weight:650;font-size:13px}.filetype select{height:40px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);padding:6px 10px;font:inherit}.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:8px;padding:10px 15px;font:600 14px system-ui;cursor:pointer}.primary{background:var(--accent);color:var(--on-accent)}.secondary{background:var(--soft);color:var(--accent)}.ico{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.btn:disabled{opacity:.45;cursor:not-allowed}.preview{min-height:260px;max-height:70vh;border:1px dashed var(--dash);border-radius:12px;background:repeating-conic-gradient(var(--check1) 0% 25%,var(--check2) 0% 50%) 50%/24px 24px;display:grid;place-items:center;overflow:auto;padding:14px}.preview canvas{display:block;max-width:min(100%,900px);max-height:64vh;object-fit:contain;box-shadow:0 3px 20px #0002}.field{min-width:0}.status{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin-top:12px}.meter{display:flex;gap:16px;align-items:center;margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:10px}.swatch{flex:none;width:64px;height:64px;border-radius:8px;display:grid;place-items:center;font:700 20px system-ui;border:1px solid var(--line)}.meter-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}.meter-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.ratio{font-size:22px;font-variant-numeric:tabular-nums;color:var(--ink)}.chip{font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;background:var(--muted)}.chip.ok{background:var(--ok)}.chip.warn{background:var(--warn);color:#2a1d00}.chip.bad{background:var(--bad)}.meter-what{font-size:13px;color:var(--muted);min-width:0}.track{position:relative;height:10px;border-radius:999px;background:var(--soft);margin-bottom:28px}.tick .tr{font-weight:700;color:var(--ink)}.tick .tn{white-space:nowrap}.legend{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 18px;font-size:12px;color:var(--muted)}p.legend{display:block}.legend b{color:var(--ink);font-variant-numeric:tabular-nums}.fill{position:absolute;inset:0 auto 0 0;border-radius:999px;background:var(--muted);transition:width .25s ease}.fill.ok{background:var(--ok)}.fill.warn{background:var(--warn)}.fill.bad{background:var(--bad)}.tick{position:absolute;top:-3px;transform:translateX(-50%);font-size:11px;line-height:1.2;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:1px;font-variant-numeric:tabular-nums;padding-top:0}.tick i{display:block;width:2px;height:16px;margin-bottom:2px;background:var(--ink);opacity:.55;border-radius:1px}.scale{display:none}@media (prefers-reduced-motion:reduce){.fill{transition:none}}@media(max-width:430px){.meter{align-items:flex-start}.swatch{width:48px;height:48px;font-size:16px}}.savebox{margin-top:16px;padding:16px;border:2px solid var(--accent);border-radius:12px;display:flex;flex-direction:column;gap:10px}.savebox-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.savebox p{margin:0;font-size:14px}.savebox code{font-size:13px;background:var(--soft);padding:1px 6px;border-radius:4px;word-break:break-all}.savebox img{display:block;max-width:100%;height:auto;border-radius:6px;box-shadow:0 3px 20px #0002}.note{font-size:12px;color:var(--muted);margin:10px 0 0}.integrity{font-weight:600}.integrity.ok{color:var(--ok)}.integrity.bad{color:var(--bad)}@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:430px){.grid{grid-template-columns:1fr}.panel{padding:17px}}
+</style><main><section class="panel"><h1>Swisscom AI Label Placer</h1><p class="intro">Upload an image, set the output size, and export a JPG, PNG or WebP with the official AI label placed automatically.</p>
+<div class="grid">
+<div class="field"><label for="file">Image</label><label class="upload" for="file">Choose image…<input id="file" type="file" accept="image/*"></label></div>
+<div class="field"><label for="preset">Size</label><select id="preset"><option value="1280,715,96" selected>Coreo header — 1280 × 715</option><option value="1200,1200,96">Square — 1200 × 1200</option><option value="1200,1500,96">Portrait — 1200 × 1500</option><option value="1200,627,96">Landscape — 1200 × 627</option><option value="custom">Custom size…</option></select></div>
+<div class="field"><label for="variant">Label file</label><select id="variant"><option value="auto">Auto</option><option value="positive">AI_Label_Positive.svg</option><option value="negative">AI_Label_Negative.svg</option><option value="transparentPositive">AI_Label_Transparent_Positive.svg</option><option value="transparentNegative">AI_Label_Transparent_Negative.svg</option></select></div>
+</div>
+<div class="grid sub" id="customFields" hidden>
+<div class="field"><label for="width">Output width (px)</label><input id="width" type="number" min="1" max="12000" value="1280"></div>
+<div class="field"><label for="height">Output height (px)</label><input id="height" type="number" min="1" max="12000" value="715"></div>
+<div class="field"><label for="labelWidth">Label width (px)</label><input id="labelWidth" type="number" min="24" max="2000" value="96"></div>
+</div>
+<label class="toggle" for="customPad" style="margin-bottom:16px"><input id="customPad" type="checkbox"> Customize padding</label>
+<div class="grid sub" id="padFields" hidden>
+<div class="field"><label for="padRight">Right padding (px)</label><input id="padRight" type="number" min="0" max="5000" value="40"></div>
+<div class="field"><label for="padBottom">Bottom padding (px)</label><input id="padBottom" type="number" min="0" max="5000" value="32"></div>
+</div>
+<div class="preview" id="preview"><span id="empty" style="color:var(--muted);text-align:center;padding:30px">Choose an image to preview the cropped output.</span><canvas id="canvas" hidden></canvas></div>
+<div class="meter" id="meter" hidden>
+<div class="swatch" id="swatch" title="Average background under the label, with the label colour on top"><span>AI</span></div>
+<div class="meter-main">
+<div class="meter-head"><strong class="ratio" id="ratio">—</strong><span class="chip" id="chip">—</span><span class="meter-what" id="contrast">—</span></div>
+<div class="track" role="img" id="track" aria-label="Contrast ratio scale"><div class="fill" id="fill"></div><span class="tick" style="left:49.4%"><i></i><span class="tr">4.5:1</span><span class="tn">Minimum</span></span></div>
+<div class="scale"><span>1:1</span><span>21:1</span></div>
+</div>
+</div>
+<div class="status"><span id="dimensions">Output: 1280 × 715 px · JPEG</span><span id="message" role="status">Image stays in your browser.</span></div>
+<div class="actions"><div class="filetype"><label for="fileType">File type</label><select id="fileType"><option value="jpg" selected>JPG</option><option value="png">PNG (lossless, larger file)</option><option value="webp">WebP</option></select></div><button class="btn primary" id="download" disabled><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14"/></svg><span id="dlText">Download JPG</span></button><button class="btn secondary" id="reset"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4.5h4.5"/></svg>Reset</button></div>
+<div class="savebox" id="saveBox" hidden>
+<div class="savebox-head"><strong>Save your image</strong><button class="btn secondary" id="saveClose" type="button">Close</button></div>
+<p>Downloading is blocked in this view. Right-click the image and choose <b>Save image as…</b> (on a phone, press and hold the image). Suggested file name: <code id="saveName"></code></p>
+<img id="saveImg" alt="Your image with the AI label, ready to save">
+</div>
+<p class="note">Images are always cropped to fill the selected output dimensions. All formats place the label 40 px from the right and 32 px from the bottom edge unless you customize the padding. The label is the official SVG file, embedded byte-for-byte and only scaled proportionally (67 : 28) — it is never recoloured or redrawn. <span id="integrity" class="integrity">Checking label files…</span></p>
+</section></main>
+<script>
+(()=>{
+// Official label artwork, embedded unmodified (base64 of the original file bytes) with SHA-256 of each original file.
+const LABELS={
+ positive:{file:'AI_Label_Positive.svg',b64:'PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCA2NyAyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjI4IiByeD0iMTIiIGZpbGw9IiMwMDExNTUiLz4KPHBhdGggZD0iTTIwLjAwNSAxNC4zNzk1TDIyLjg4OCAxMy4zMTNDMjMuMDc3NSAxMy4yNDMgMjMuMjI2NSAxMy4wOTQgMjMuMjk3IDEyLjkwNEwyNC4zNjM1IDEwLjAyMUMyNC40MDggOS45MDAwMSAyNC41MjM1IDkuODIwMDEgMjQuNjUyIDkuODIwMDFDMjQuNzgwNSA5LjgyMDAxIDI0Ljg5NiA5LjkwMDAxIDI0Ljk0MDUgMTAuMDIxTDI2LjAwNyAxMi45MDRDMjYuMDc3IDEzLjA5MzUgMjYuMjI2IDEzLjI0MjUgMjYuNDE2IDEzLjMxM0wyOS4yOTkgMTQuMzc5NUMyOS40MiAxNC40MjQgMjkuNSAxNC41Mzk1IDI5LjUgMTQuNjY4QzI5LjUgMTQuNzk2NSAyOS40MiAxNC45MTIgMjkuMjk5IDE0Ljk1NjVMMjYuNDE2IDE2LjAyM0MyNi4yMjY1IDE2LjA5MyAyNi4wNzc1IDE2LjI0MiAyNi4wMDcgMTYuNDMyTDI0Ljk0MDUgMTkuMzE1QzI0Ljg5NiAxOS40MzYgMjQuNzgwNSAxOS41MTYgMjQuNjUyIDE5LjUxNkMyNC41MjM1IDE5LjUxNiAyNC40MDggMTkuNDM2IDI0LjM2MzUgMTkuMzE1TDIzLjI5NyAxNi40MzJDMjMuMjI3IDE2LjI0MjUgMjMuMDc4IDE2LjA5MzUgMjIuODg4IDE2LjAyM0wyMC4wMDUgMTQuOTU2NUMxOS44ODQgMTQuOTEyIDE5LjgwNCAxNC43OTY1IDE5LjgwNCAxNC42NjhDMTkuODA0IDE0LjUzOTUgMTkuODg0IDE0LjQyNCAyMC4wMDUgMTQuMzc5NVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xOC43MDEgMTAuNTM1NUwxOS45OTEgMTAuMDU4QzIwLjAyOTUgMTAuMDQ0IDIwLjA1OTUgMTAuMDE0IDIwLjA3MzUgOS45NzU1MUwyMC41NTEgOC42ODUwMUMyMC41OTU1IDguNTY0MDEgMjAuNzExIDguNDg0MDEgMjAuODM5NSA4LjQ4NDAxQzIwLjk2OCA4LjQ4NDAxIDIxLjA4MzUgOC41NjQwMSAyMS4xMjggOC42ODUwMUwyMS42MDU1IDkuOTc1NTFDMjEuNjE5NSAxMC4wMTQgMjEuNjQ5NSAxMC4wNDQgMjEuNjg4IDEwLjA1OEwyMi45Nzg1IDEwLjUzNTVDMjMuMDk5NSAxMC41OCAyMy4xNzk1IDEwLjY5NTUgMjMuMTc5NSAxMC44MjRDMjMuMTc5NSAxMC45NTI1IDIzLjA5OTUgMTEuMDY4IDIyLjk3ODUgMTEuMTEyNUwyMS42ODggMTEuNTlDMjEuNjQ5NSAxMS42MDQgMjEuNjE5NSAxMS42MzQ1IDIxLjYwNTUgMTEuNjcyNUwyMS4xMjggMTIuOTYzQzIxLjA4MzUgMTMuMDg0IDIwLjk2OCAxMy4xNjQgMjAuODM5NSAxMy4xNjRDMjAuNzExIDEzLjE2NCAyMC41OTU1IDEzLjA4NCAyMC41NTEgMTIuOTYzTDIwLjA3MzUgMTEuNjczQzIwLjA1OTUgMTEuNjM0NSAyMC4wMjk1IDExLjYwNDUgMTkuOTkxIDExLjU5MDVMMTguNzAxIDExLjExM0MxOC41OCAxMS4wNjg1IDE4LjUgMTAuOTUzIDE4LjUgMTAuODI0NUMxOC41IDEwLjY5NiAxOC41OCAxMC41OCAxOC43MDEgMTAuNTM1NVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik00MS4zMjggMTEuNTZDNDEuMjQyNyAxMS4yOTMzIDQxLjE1NzMgMTEuMDQyNyA0MS4wNzIgMTAuODA4QzQwLjk5NzMgMTAuNTYyNyA0MC45MzMzIDEwLjMyMjcgNDAuODggMTAuMDg4SDQwLjg0OEM0MC43NDEzIDEwLjUzNiA0MC41OTczIDExLjAyMTMgNDAuNDE2IDExLjU0NEwzOS4xMiAxNS4yMjRINDIuNjI0TDQxLjMyOCAxMS41NlpNNDMuODg4IDE5TDQzLjA3MiAxNi42MTZIMzguNjg4TDM3Ljg1NiAxOUgzNi4wOTZMMzkuOTM2IDguMkg0MS45MzZMNDUuODI0IDE5SDQzLjg4OFpNNDcuMTY5OSAxOVY4LjJINDguOTEzOVYxOUg0Ny4xNjk5WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==',sha:'71c83815c8ef72e17742ccc0267b47d0b3a3d4fc6b09b8b7fd42fcb5fb19349b',solid:true},
+ negative:{file:'AI_Label_Negative.svg',b64:'PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCA2NyAyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjI4IiByeD0iMTIiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yMC4wMDUgMTQuMzc5NUwyMi44ODggMTMuMzEzQzIzLjA3NzUgMTMuMjQzIDIzLjIyNjUgMTMuMDk0IDIzLjI5NyAxMi45MDRMMjQuMzYzNSAxMC4wMjFDMjQuNDA4IDkuOTAwMDEgMjQuNTIzNSA5LjgyMDAxIDI0LjY1MiA5LjgyMDAxQzI0Ljc4MDUgOS44MjAwMSAyNC44OTYgOS45MDAwMSAyNC45NDA1IDEwLjAyMUwyNi4wMDcgMTIuOTA0QzI2LjA3NyAxMy4wOTM1IDI2LjIyNiAxMy4yNDI1IDI2LjQxNiAxMy4zMTNMMjkuMjk5IDE0LjM3OTVDMjkuNDIgMTQuNDI0IDI5LjUgMTQuNTM5NSAyOS41IDE0LjY2OEMyOS41IDE0Ljc5NjUgMjkuNDIgMTQuOTEyIDI5LjI5OSAxNC45NTY1TDI2LjQxNiAxNi4wMjNDMjYuMjI2NSAxNi4wOTMgMjYuMDc3NSAxNi4yNDIgMjYuMDA3IDE2LjQzMkwyNC45NDA1IDE5LjMxNUMyNC44OTYgMTkuNDM2IDI0Ljc4MDUgMTkuNTE2IDI0LjY1MiAxOS41MTZDMjQuNTIzNSAxOS41MTYgMjQuNDA4IDE5LjQzNiAyNC4zNjM1IDE5LjMxNUwyMy4yOTcgMTYuNDMyQzIzLjIyNyAxNi4yNDI1IDIzLjA3OCAxNi4wOTM1IDIyLjg4OCAxNi4wMjNMMjAuMDA1IDE0Ljk1NjVDMTkuODg0IDE0LjkxMiAxOS44MDQgMTQuNzk2NSAxOS44MDQgMTQuNjY4QzE5LjgwNCAxNC41Mzk1IDE5Ljg4NCAxNC40MjQgMjAuMDA1IDE0LjM3OTVaIiBmaWxsPSIjMDAxMTU1Ii8+CjxwYXRoIGQ9Ik0xOC43MDEgMTAuNTM1NUwxOS45OTEgMTAuMDU4QzIwLjAyOTUgMTAuMDQ0IDIwLjA1OTUgMTAuMDE0IDIwLjA3MzUgOS45NzU1MUwyMC41NTEgOC42ODUwMUMyMC41OTU1IDguNTY0MDEgMjAuNzExIDguNDg0MDEgMjAuODM5NSA4LjQ4NDAxQzIwLjk2OCA4LjQ4NDAxIDIxLjA4MzUgOC41NjQwMSAyMS4xMjggOC42ODUwMUwyMS42MDU1IDkuOTc1NTFDMjEuNjE5NSAxMC4wMTQgMjEuNjQ5NSAxMC4wNDQgMjEuNjg4IDEwLjA1OEwyMi45Nzg1IDEwLjUzNTVDMjMuMDk5NSAxMC41OCAyMy4xNzk1IDEwLjY5NTUgMjMuMTc5NSAxMC44MjRDMjMuMTc5NSAxMC45NTI1IDIzLjA5OTUgMTEuMDY4IDIyLjk3ODUgMTEuMTEyNUwyMS42ODggMTEuNTlDMjEuNjQ5NSAxMS42MDQgMjEuNjE5NSAxMS42MzQ1IDIxLjYwNTUgMTEuNjcyNUwyMS4xMjggMTIuOTYzQzIxLjA4MzUgMTMuMDg0IDIwLjk2OCAxMy4xNjQgMjAuODM5NSAxMy4xNjRDMjAuNzExIDEzLjE2NCAyMC41OTU1IDEzLjA4NCAyMC41NTEgMTIuOTYzTDIwLjA3MzUgMTEuNjczQzIwLjA1OTUgMTEuNjM0NSAyMC4wMjk1IDExLjYwNDUgMTkuOTkxIDExLjU5MDVMMTguNzAxIDExLjExM0MxOC41OCAxMS4wNjg1IDE4LjUgMTAuOTUzIDE4LjUgMTAuODI0NUMxOC41IDEwLjY5NiAxOC41OCAxMC41OCAxOC43MDEgMTAuNTM1NVoiIGZpbGw9IiMwMDExNTUiLz4KPHBhdGggZD0iTTQxLjMyOCAxMS41NkM0MS4yNDI3IDExLjI5MzMgNDEuMTU3MyAxMS4wNDI3IDQxLjA3MiAxMC44MDhDNDAuOTk3MyAxMC41NjI3IDQwLjkzMzMgMTAuMzIyNyA0MC44OCAxMC4wODhINDAuODQ4QzQwLjc0MTMgMTAuNTM2IDQwLjU5NzMgMTEuMDIxMyA0MC40MTYgMTEuNTQ0TDM5LjEyIDE1LjIyNEg0Mi42MjRMNDEuMzI4IDExLjU2Wk00My44ODggMTlMNDMuMDcyIDE2LjYxNkgzOC42ODhMMzcuODU2IDE5SDM2LjA5NkwzOS45MzYgOC4ySDQxLjkzNkw0NS44MjQgMTlINDMuODg4Wk00Ny4xNjk5IDE5VjguMkg0OC45MTM5VjE5SDQ3LjE2OTlaIiBmaWxsPSIjMDAxMTU1Ii8+Cjwvc3ZnPgo=',sha:'a96a86e584ac347df9fbaace46ac860651cc572d252a092e30d9a8da248f04ab',solid:true},
+ transparentPositive:{file:'AI_Label_Transparent_Positive.svg',b64:'PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iRWJlbmVfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA2NyAyOCI+CiAgPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDMwLjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDIuMS4xIEJ1aWxkIDEzNikgIC0tPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuc3QwIHsKICAgICAgICBmaWxsOiBub25lOwogICAgICAgIHN0cm9rZTogI2ZmZjsKICAgICAgICBzdHJva2UtbWl0ZXJsaW1pdDogMTA7CiAgICAgIH0KCiAgICAgIC5zdDEgewogICAgICAgIG9wYWNpdHk6IC4xOwogICAgICB9CgogICAgICAuc3QxLCAuc3QyIHsKICAgICAgICBmaWxsOiAjZmZmOwogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KICA8cmVjdCBjbGFzcz0ic3QxIiB3aWR0aD0iNjciIGhlaWdodD0iMjgiIHJ4PSIxMiIgcnk9IjEyIi8+CiAgPHBhdGggY2xhc3M9InN0MiIgZD0iTTIwLDE0LjM4bDIuODgtMS4wN2MuMTktLjA3LjM0LS4yMi40MS0uNDFsMS4wNy0yLjg4Yy4wNC0uMTIuMTYtLjIuMjktLjJzLjI0LjA4LjI5LjJsMS4wNywyLjg4Yy4wNy4xOS4yMi4zNC40MS40MWwyLjg4LDEuMDdjLjEyLjA0LjIuMTYuMi4yOXMtLjA4LjI0LS4yLjI5bC0yLjg4LDEuMDdjLS4xOS4wNy0uMzQuMjItLjQxLjQxbC0xLjA3LDIuODhjLS4wNC4xMi0uMTYuMi0uMjkuMnMtLjI0LS4wOC0uMjktLjJsLTEuMDctMi44OGMtLjA3LS4xOS0uMjItLjM0LS40MS0uNDFsLTIuODgtMS4wN2MtLjEyLS4wNC0uMi0uMTYtLjItLjI5cy4wOC0uMjQuMi0uMjlaIi8+CiAgPHBhdGggY2xhc3M9InN0MiIgZD0iTTE4LjcsMTAuNTRsMS4yOS0uNDhzLjA3LS4wNC4wOC0uMDhsLjQ4LTEuMjljLjA0LS4xMi4xNi0uMi4yOS0uMnMuMjQuMDguMjkuMmwuNDgsMS4yOXMuMDQuMDcuMDguMDhsMS4yOS40OGMuMTIuMDQuMi4xNi4yLjI5cy0uMDguMjQtLjIuMjlsLTEuMjkuNDhzLS4wNy4wNC0uMDguMDhsLS40OCwxLjI5Yy0uMDQuMTItLjE2LjItLjI5LjJzLS4yNC0uMDgtLjI5LS4ybC0uNDgtMS4yOXMtLjA0LS4wNy0uMDgtLjA4bC0xLjI5LS40OGMtLjEyLS4wNC0uMi0uMTYtLjItLjI5cy4wOC0uMjQuMi0uMjlaIi8+CiAgPHBhdGggY2xhc3M9InN0MiIgZD0iTTQxLjMzLDExLjU2Yy0uMDktLjI3LS4xNy0uNTItLjI2LS43NS0uMDctLjI1LS4xNC0uNDktLjE5LS43MmgtLjAzYy0uMTEuNDUtLjI1LjkzLS40MywxLjQ2bC0xLjMsMy42OGgzLjVsLTEuMy0zLjY2Wk00My44OSwxOWwtLjgyLTIuMzhoLTQuMzhsLS44MywyLjM4aC0xLjc2bDMuODQtMTAuOGgybDMuODksMTAuOGgtMS45NFpNNDcuMTcsMTl2LTEwLjhoMS43NHYxMC44aC0xLjc0WiIvPgogIDxyZWN0IGNsYXNzPSJzdDAiIHg9Ii41IiB5PSIuNSIgd2lkdGg9IjY2IiBoZWlnaHQ9IjI3IiByeD0iMTEuNyIgcnk9IjExLjciLz4KPC9zdmc+',sha:'29ea40c95cc5142db0bace1f356c001f247e350978e00a0cbba028c8c4cb735b',solid:false},
+ transparentNegative:{file:'AI_Label_Transparent_Negative.svg',b64:'PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iRWJlbmVfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA2NyAyOCI+CiAgPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDMwLjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDIuMS4xIEJ1aWxkIDEzNikgIC0tPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuc3QwIHsKICAgICAgICBmaWxsOiBub25lOwogICAgICAgIHN0cm9rZTogIzAxNTsKICAgICAgICBzdHJva2UtbWl0ZXJsaW1pdDogMTA7CiAgICAgIH0KCiAgICAgIC5zdDEgewogICAgICAgIGZpbGw6ICMwMTU7CiAgICAgIH0KCiAgICAgIC5zdDIgewogICAgICAgIGZpbGw6ICNmZmY7CiAgICAgICAgaXNvbGF0aW9uOiBpc29sYXRlOwogICAgICAgIG9wYWNpdHk6IC4xOwogICAgICB9CiAgICA8L3N0eWxlPgogIDwvZGVmcz4KICA8cmVjdCBjbGFzcz0ic3QyIiB3aWR0aD0iNjciIGhlaWdodD0iMjgiIHJ4PSIxMiIgcnk9IjEyIi8+CiAgPHBhdGggY2xhc3M9InN0MSIgZD0iTTIwLDE0LjM4bDIuODgtMS4wN2MuMTktLjA3LjM0LS4yMi40MS0uNDFsMS4wNy0yLjg4Yy4wNC0uMTIuMTYtLjIuMjktLjJzLjI0LjA4LjI5LjJsMS4wNywyLjg4Yy4wNy4xOS4yMi4zNC40MS40MWwyLjg4LDEuMDdjLjEyLjA0LjIuMTYuMi4yOXMtLjA4LjI0LS4yLjI5bC0yLjg4LDEuMDdjLS4xOS4wNy0uMzQuMjItLjQxLjQxbC0xLjA3LDIuODhjLS4wNC4xMi0uMTYuMi0uMjkuMnMtLjI0LS4wOC0uMjktLjJsLTEuMDctMi44OGMtLjA3LS4xOS0uMjItLjM0LS40MS0uNDFsLTIuODgtMS4wN2MtLjEyLS4wNC0uMi0uMTYtLjItLjI5cy4wOC0uMjQuMi0uMjlaIi8+CiAgPHBhdGggY2xhc3M9InN0MSIgZD0iTTE4LjcsMTAuNTRsMS4yOS0uNDhzLjA3LS4wNC4wOC0uMDhsLjQ4LTEuMjljLjA0LS4xMi4xNi0uMi4yOS0uMnMuMjQuMDguMjkuMmwuNDgsMS4yOXMuMDQuMDcuMDguMDhsMS4yOS40OGMuMTIuMDQuMi4xNi4yLjI5cy0uMDguMjQtLjIuMjlsLTEuMjkuNDhzLS4wNy4wNC0uMDguMDhsLS40OCwxLjI5Yy0uMDQuMTItLjE2LjItLjI5LjJzLS4yNC0uMDgtLjI5LS4ybC0uNDgtMS4yOXMtLjA0LS4wNy0uMDgtLjA4bC0xLjI5LS40OGMtLjEyLS4wNC0uMi0uMTYtLjItLjI5cy4wOC0uMjQuMi0uMjlaIi8+CiAgPHJlY3QgY2xhc3M9InN0MCIgeD0iLjUiIHk9Ii41IiB3aWR0aD0iNjYiIGhlaWdodD0iMjciIHJ4PSIxMS43IiByeT0iMTEuNyIvPgogIDxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik00MS44NCwxMS45Yy0uMDktLjI3LS4xNy0uNTItLjI2LS43NS0uMDctLjI1LS4xNC0uNDktLjE5LS43MmgtLjAzYy0uMTEuNDUtLjI1LjkzLS40MywxLjQ2bC0xLjMsMy42OGgzLjVsLTEuMy0zLjY2aDBaTTQ0LjQsMTkuMzRsLS44Mi0yLjM4aC00LjM4bC0uODMsMi4zOGgtMS43NmwzLjg0LTEwLjhoMmwzLjg5LDEwLjhoLTEuOTRaTTQ3LjY4LDE5LjM0di0xMC44aDEuNzR2MTAuOGgtMS43NFoiLz4KPC9zdmc+',sha:'faec51b7fcbef1321f73667482ae2a48235c6f6e8f9d22e9bc2f6ae299a4d1e2',solid:false}
+};
+const ASPECT=28/67;
+const BUSY_SD=.12,BUSY_EDGE=.04; // thresholds for switching Auto from outline to solid // native viewBox of every label file
+const TYPES={jpg:{name:'JPG',mime:'image/jpeg',ext:'jpg',q:.92},png:{name:'PNG',mime:'image/png',ext:'png'},webp:{name:'WebP',mime:'image/webp',ext:'webp',q:.92}};
+const NAVY=[0,17,85],WHITE=[255,255,255];
+const $=id=>document.getElementById(id),file=$('file'),preset=$('preset'),w=$('width'),h=$('height'),lw=$('labelWidth'),variant=$('variant'),fileType=$('fileType'),canvas=$('canvas'),ctx=canvas.getContext('2d'),download=$('download');
+let image=null,filename='image',labelsReady=false,integrityOk=false,drawToken=0;
+const b64bytes=b=>Uint8Array.from(atob(b),c=>c.charCodeAt(0));
+const hex=buf=>[...new Uint8Array(buf)].map(x=>x.toString(16).padStart(2,'0')).join('');
+
+// Verify every embedded file still matches the original hash, then load it as an image.
+async function prepareLabels(){
+  let verified=true,checked=!!(window.crypto&&crypto.subtle);
+  for(const L of Object.values(LABELS)){
+    const bytes=b64bytes(L.b64);
+    if(checked){const d=hex(await crypto.subtle.digest('SHA-256',bytes));if(d!==L.sha)verified=false}
+    L.url='data:image/svg+xml;base64,'+L.b64;
+  }
+  integrityOk=verified;
+  const el=$('integrity');
+  if(!checked){el.textContent='Label files embedded (hash check unavailable in this browser).';el.className='integrity'}
+  else if(verified){el.textContent='✓ All 4 label files verified against the originals (SHA-256).';el.className='integrity ok'}
+  else{el.textContent='✗ Label files do not match the originals — export disabled.';el.className='integrity bad'}
+  labelsReady=true;draw();
+}
+
+// Rasterise an original label at an exact pixel size. The original file is referenced untouched
+// inside a sizing wrapper, because two of the files carry no width/height (only a viewBox).
+const cache=new Map();
+function labelImage(key,pw,ph){
+  const id=key+'@'+pw+'x'+ph;if(cache.has(id))return cache.get(id);
+  const wrapper=`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${pw}" height="${ph}" viewBox="0 0 67 28"><image width="67" height="28" preserveAspectRatio="none" href="${LABELS[key].url}" xlink:href="${LABELS[key].url}"/></svg>`;
+  const p=new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(wrapper)});
+  cache.set(id,p);return p;
+}
+
+const DEFAULT_PAD=[40,32]; // same padding for every format
+function inset(){if(!$('customPad').checked)return DEFAULT_PAD;const n=(el,d)=>{const v=parseInt(el.value);return Number.isFinite(v)&&v>=0?v:d};return [n($('padRight'),DEFAULT_PAD[0]),n($('padBottom'),DEFAULT_PAD[1])]}
+function lum(rgb){const a=rgb.map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4});return .2126*a[0]+.7152*a[1]+.0722*a[2]}
+function contrast(a,b){return (Math.max(a,b)+.05)/(Math.min(a,b)+.05)}
+
+async function draw(){
+  const token=++drawToken;if(!$('saveBox').hidden)hideSaveFallback();
+  const W=Math.max(1,Math.min(12000,parseInt(w.value)||1280)),H=Math.max(1,Math.min(12000,parseInt(h.value)||715));
+  const FT=TYPES[fileType.value];$('dimensions').textContent=`Output: ${W} × ${H} px · ${FT.name}`;$('dlText').textContent='Download '+FT.name;
+  if(!image||!labelsReady){download.disabled=true;return}
+  const [right,bottom]=inset();
+  const labelW=Math.max(1,Math.min(parseInt(lw.value)||96,W-right)),labelH=labelW*ASPECT;
+  const x=Math.round(W-right-labelW),y=Math.round(H-bottom-labelH);
+
+  // Draw cover-cropped photo on an off-screen canvas first so the preview never flashes.
+  const off=document.createElement('canvas');off.width=W;off.height=H;const o=off.getContext('2d');
+  const scale=Math.max(W/image.naturalWidth,H/image.naturalHeight),sw=W/scale,sh=H/scale,sx=(image.naturalWidth-sw)/2,sy=(image.naturalHeight-sh)/2;
+  o.drawImage(image,sx,sy,sw,sh,0,0,W,H);
+
+  // Average background luminance under the label.
+  const rw=Math.max(1,Math.min(W-x,Math.round(labelW))),rh=Math.max(1,Math.min(H-y,Math.round(labelH)));
+  const pix=o.getImageData(Math.max(0,x),Math.max(0,y),rw,rh).data;
+  let total=0,n=0,sr=0,sg=0,sb=0;for(let i=0;i<pix.length;i+=4){total+=lum([pix[i],pix[i+1],pix[i+2]]);sr+=pix[i];sg+=pix[i+1];sb+=pix[i+2];n++}
+  const avg=[sr,sg,sb].map(v=>Math.round(v/Math.max(1,n)));
+  const bgLum=total/Math.max(1,n),navyLum=lum(NAVY),whiteLum=1;
+
+  // Busyness: spread of perceived lightness + average edge strength under the label (both 0–1).
+  const Ls=new Float32Array(rw*rh);for(let i=0,j=0;i<pix.length;i+=4,j++){const L=lum([pix[i],pix[i+1],pix[i+2]]);Ls[j]=L>.008856?(116*Math.cbrt(L)-16)/100:9.033*L}
+  let m=0;for(const v of Ls)m+=v;m/=Ls.length;let sd=0;for(const v of Ls)sd+=(v-m)**2;sd=Math.sqrt(sd/Ls.length);
+  let edge=0,ne=0;for(let yy=0;yy<rh;yy++)for(let xx=0;xx<rw;xx++){const k=yy*rw+xx;if(xx+1<rw){edge+=Math.abs(Ls[k+1]-Ls[k]);ne++}if(yy+1<rh){edge+=Math.abs(Ls[k+rw]-Ls[k]);ne++}}edge/=Math.max(1,ne);
+  const busy=sd>BUSY_SD||edge>BUSY_EDGE;
+  let key=variant.value,autoReason='';
+  if(key==='auto'){
+    const lightArt=contrast(bgLum,whiteLum)>=contrast(bgLum,navyLum); // white artwork on dark, navy on light
+    const outline=lightArt?'transparentPositive':'transparentNegative',outlineRatio=contrast(bgLum,lightArt?whiteLum:navyLum);
+    if(busy){key=lightArt?'negative':'positive';autoReason='busy background → solid'}
+    else if(outlineRatio<4.5){key=lightArt?'negative':'positive';autoReason='low contrast → solid'}
+    else{key=outline;autoReason='outline'}
+  }
+
+  let im;try{im=await labelImage(key,labelW,labelH)}catch(e){$('message').textContent='Could not render label file.';return}
+  if(token!==drawToken)return;
+  o.drawImage(im,x,y,labelW,labelH);
+
+  canvas.width=W;canvas.height=H;ctx.drawImage(off,0,0);
+  $('empty').hidden=true;canvas.hidden=false;download.disabled=!integrityOk;
+
+  // Contrast info: solid labels -> pill vs. background; transparent labels -> artwork colour vs. background.
+  const pillOrInk=key==='positive'?navyLum:key==='negative'?whiteLum:key==='transparentPositive'?whiteLum:navyLum;
+  const ratio=contrast(pillOrInk,bgLum);
+  const what=LABELS[key].solid?'label vs. background':'artwork vs. background';
+  const level=ratio>=4.5?['ok','Passes 4.5:1']:['bad','Below 4.5:1'];
+  $('ratio').textContent=ratio.toFixed(2)+':1';
+  $('chip').textContent=level[1];$('chip').className='chip '+level[0];
+  $('fill').style.width=(Math.log(ratio)/Math.log(21)*100).toFixed(1)+'%';$('fill').className='fill '+level[0];
+  $('track').setAttribute('aria-label',`Contrast ${ratio.toFixed(2)} to 1 on a scale from 1 to 21`);
+  const fg=pillOrInk===whiteLum?'#ffffff':'#001155';
+  $('swatch').style.background=`rgb(${avg.join(',')})`;$('swatch').style.color=fg;
+  $('contrast').textContent=`${LABELS[key].file}${variant.value==='auto'?` (auto: ${autoReason})`:''} · ${what}`;
+  $('meter').hidden=false;
+  $('message').textContent=`Cover crop · label ${labelW} × ${labelH.toFixed(1)} px · ${right}px right / ${bottom}px bottom`;
+}
+
+file.addEventListener('change',()=>{const f=file.files&&file.files[0];if(!f)return;if(!f.type.startsWith('image/')){$('message').textContent='Please choose a valid image file.';return}filename=f.name.replace(/\.[^.]+$/,'')||'image';const url=URL.createObjectURL(f);const im=new Image();im.onload=()=>{image=im;draw();URL.revokeObjectURL(url)};im.onerror=()=>{$('message').textContent='Could not read this image. Try a JPG or PNG.';URL.revokeObjectURL(url)};im.src=url});
+preset.addEventListener('change',()=>{const custom=preset.value==='custom';$('customFields').hidden=!custom;if(!custom){const [W,H,L]=preset.value.split(',').map(Number);w.value=W;h.value=H;lw.value=L}draw()});
+$('customPad').addEventListener('change',()=>{$('padFields').hidden=!$('customPad').checked;draw()});[$('padRight'),$('padBottom')].forEach(el=>el.addEventListener('input',draw));
+[w,h,lw,variant,fileType].forEach(el=>el.addEventListener('input',draw));
+$('reset').addEventListener('click',()=>{drawToken++;image=null;file.value='';preset.value='1280,715,96';w.value=1280;h.value=715;lw.value=96;variant.value='auto';fileType.value='jpg';$('customFields').hidden=true;$('customPad').checked=false;$('padFields').hidden=true;$('padRight').value=40;$('padBottom').value=32;canvas.hidden=true;$('empty').hidden=false;$('meter').hidden=true;$('message').textContent='Image stays in your browser.';download.disabled=true;loadSample()});
+// Inside claude.ai the page saves through the viewer's download prompt; opened as a local file it falls back to a normal link.
+let saver=null;const inViewer=!!(window.claude&&claude.use);if(inViewer)claude.use('downloads').then(d=>{saver=d}).catch(()=>{});
+download.addEventListener('click',()=>{if(!image||!integrityOk)return;const FT=TYPES[fileType.value];canvas.toBlob(async blob=>{if(!blob){$('message').textContent=FT.name+' export failed.';return}if(blob.type!==FT.mime){$('message').textContent=FT.name+' export is not supported in this browser. Choose JPG or PNG.';return}const name=filename+'-ai-label.'+FT.ext;
+ if(saver){try{await saver.save({filename:name,data:blob});$('message').textContent='Saved '+name}catch(e){if(e&&e.code==='declined'){$('message').textContent='Download cancelled.'}else showSaveFallback(blob,name)}return}
+ if(inViewer){showSaveFallback(blob,name);return}
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)},FT.mime,FT.q)});
+// Fallback when the viewer can't download (e.g. people outside the workspace): show the finished image so it can be saved with right-click / long-press.
+let saveUrl=null;
+function showSaveFallback(blob,name){if(saveUrl)URL.revokeObjectURL(saveUrl);saveUrl=URL.createObjectURL(blob);$('saveImg').src=saveUrl;$('saveName').textContent=name;$('saveBox').hidden=false;$('message').textContent='Use right-click → Save image as… on the image below.';$('saveBox').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'})}
+function hideSaveFallback(){$('saveBox').hidden=true}
+$('saveClose').addEventListener('click',hideSaveFallback);
+// Sample photo so the tool opens in a working state (replace it with "Choose image…").
+function loadSample(){const c=document.createElement('canvas');c.width=1600;c.height=1000;const x=c.getContext('2d');
+ const sky=x.createLinearGradient(0,0,0,1000);sky.addColorStop(0,'#f7c8a0');sky.addColorStop(.55,'#e98a6b');sky.addColorStop(1,'#3a2f4f');x.fillStyle=sky;x.fillRect(0,0,1600,1000);
+ x.fillStyle='#fff3d6';x.beginPath();x.arc(1050,520,120,0,Math.PI*2);x.fill();
+ const hills=[['#5b4a6e',620,.004,90],['#3f3554',700,.006,70],['#241f35',800,.003,110]];
+ for(const [col,base,f,amp] of hills){x.fillStyle=col;x.beginPath();x.moveTo(0,1000);for(let i=0;i<=1600;i+=8)x.lineTo(i,base+Math.sin(i*f)*amp+Math.sin(i*f*3.1)*amp*.3);x.lineTo(1600,1000);x.fill()}
+ const im=new Image();im.onload=()=>{if(image)return;image=im;filename='sample';draw();$('message').textContent='Sample image · choose your own to replace it'};im.src=c.toDataURL('image/jpeg',.9)}
+
+prepareLabels();loadSample();
+})();
+</script>
+
+</body></html>
