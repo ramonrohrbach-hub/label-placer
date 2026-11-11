@@ -1,6 +1,6 @@
 # Swisscom AI Label Placer
 
-Browser tool that crops an image to a Swisscom format and places the official AI label in the bottom-right corner, then exports JPG, PNG or WebP.
+Browser tool that crops an image to a Swisscom format and places the official AI label in a corner, then exports JPG, PNG or WebP.
 
 Open `index.html` in any browser, or use the GitHub Pages site. Images never leave the browser.
 
@@ -18,7 +18,7 @@ The four official label files are in `labels/`. `index.html` embeds them byte-fo
 | Landscape | 1200 × 627 px | 96 px |
 | Custom | any | any |
 
-Default padding is 40 px right and 32 px bottom for every format; it can be customized.
+The label goes bottom right by default; it can also be placed bottom left, top right or top left. Padding is 40 px from the side edge and 32 px from the top or bottom edge for every format and position, and can be customized.
 
 ## Auto label choice
 

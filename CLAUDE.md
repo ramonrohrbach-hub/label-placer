@@ -10,7 +10,8 @@ https://ramonrohrbach-hub.github.io/label-placer/
 
 ## Behaviour
 - Formats: Coreo header 1280×715, Square 1200×1200, Portrait 1200×1500, Landscape 1200×627 (label 96 px), plus Custom (shows width/height/label inputs only when selected).
-- Padding: 40 px right / 32 px bottom for every format; "Customize padding" checkbox reveals inputs.
+- Position: Bottom right (default), Bottom left, Top right, Top left.
+- Padding: 40 px from the side edge / 32 px from the top or bottom edge for every format and position; "Customize padding" checkbox reveals side and top/bottom inputs.
 - Auto label: outline (Transparent_Positive on dark, Transparent_Negative on light); switches to solid (Negative on dark, Positive on light) when the background is busy (`BUSY_SD`, `BUSY_EDGE`) or outline contrast < 4.5:1.
 - Contrast meter shows only the 4.5:1 minimum.
 - File types: JPG, PNG, WebP, chosen next to the Download button.
